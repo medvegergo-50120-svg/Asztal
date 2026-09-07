@@ -126,6 +126,7 @@ namespace Idk_anymore
         public void Favágás()
         {
             Inventory.Add(Item.Fa);
+            Console.WriteLine("Kivágta a fát");
         }
         public void ShowInventory()
         {

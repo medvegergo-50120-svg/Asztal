@@ -1,0 +1,7 @@
+C:\Users\72642417823\Documents\GitHub\Asztal\Idk_anymore\obj\Debug\Idk_anymore.csproj.AssemblyReference.cache
+C:\Users\72642417823\Documents\GitHub\Asztal\Idk_anymore\obj\Debug\Idk_anymore.csproj.CoreCompileInputs.cache
+C:\Users\72642417823\Documents\GitHub\Asztal\Idk_anymore\bin\Debug\Idk_anymore.exe.config
+C:\Users\72642417823\Documents\GitHub\Asztal\Idk_anymore\bin\Debug\Idk_anymore.exe
+C:\Users\72642417823\Documents\GitHub\Asztal\Idk_anymore\bin\Debug\Idk_anymore.pdb
+C:\Users\72642417823\Documents\GitHub\Asztal\Idk_anymore\obj\Debug\Idk_anymore.exe
+C:\Users\72642417823\Documents\GitHub\Asztal\Idk_anymore\obj\Debug\Idk_anymore.pdb

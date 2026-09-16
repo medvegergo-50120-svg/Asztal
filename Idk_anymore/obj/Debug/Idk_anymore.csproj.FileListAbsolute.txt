@@ -5,3 +5,4 @@ C:\Users\72642417823\Documents\GitHub\Asztal\Idk_anymore\bin\Debug\Idk_anymore.e
 C:\Users\72642417823\Documents\GitHub\Asztal\Idk_anymore\bin\Debug\Idk_anymore.pdb
 C:\Users\72642417823\Documents\GitHub\Asztal\Idk_anymore\obj\Debug\Idk_anymore.exe
 C:\Users\72642417823\Documents\GitHub\Asztal\Idk_anymore\obj\Debug\Idk_anymore.pdb
+C:\Users\72642417823\Documents\GitHub\Asztal\Idk_anymore\obj\Debug\Idk_anymore.exe.config

@@ -24,9 +24,11 @@ namespace Idk_anymore
             Gyogynoveny,
             Alkohol
         }
+        public string Nev { get; set; }
         public bool Ittas { get; set; }
         public int HP { get; set; }
         public int MaxHP { get; set; }
+        public int MaxÉtel { get; set; }
         public int Étel { get; set; }
         public int Víz { get; set; }
         public int Fa { get; set; }
@@ -34,11 +36,13 @@ namespace Idk_anymore
         public Teruletek Helység { get; set; }
         public List<Item> Inventory = new List<Item>();
         bool tamadas = false;
-        public Player(int maxhp, int maxEtel, int sebzes)
+        public Player(string nev, int maxhp, int maxEtel, int sebzes)
         {
+            Nev = nev;
             MaxHP = maxhp;
             HP = maxhp;
-            maxEtel = maxEtel;
+            Étel = maxEtel;
+            MaxÉtel = maxEtel;
             Sebzes = sebzes;
             Helység = Teruletek.Otthon;
         }
@@ -50,32 +54,65 @@ namespace Idk_anymore
         {
             if (Inventory.Contains(Item.Alkohol))
             {
+                Console.WriteLine("Elhasználtál egy alkoholt, a karakter részeg lett!");
                 Ittas = true;
                 Inventory.Remove(Item.Alkohol);
+                return;
             }
+            Console.WriteLine("Nincs rendelkezésre álló hangulatmódosító szer!");
         }
         public void Heal()
         {
-            if (Inventory.Contains(Item.Gyogynoveny))
+            if (Inventory.Contains(Item.Gyogynoveny) && HP <= MaxHP - 2)
             {
                 HP += 2;
+                Console.WriteLine("Elhasználtál egy gyógynövényt + 2HP");
+                Inventory.Remove(Item.Gyogynoveny);
+            }
+            else if (HP == MaxHP && Inventory.Contains(Item.Gyogynoveny))
+            {
+                Console.WriteLine("Már tele vagy, nem használhatsz gyógynövényt");
+                return;
+            }
+            else if (HP == (MaxHP - 1) && Inventory.Contains(Item.Gyogynoveny))
+            {
+                HP += 1;
+                Console.WriteLine("Már majdnem tele vagy, csak 1 HPt adott a gyógynövény dumbass");
+                Inventory.Remove(Item.Gyogynoveny);
+            }
+            else
+            {
+                Console.WriteLine("Nincs gyógynövényed");
+                return;
             }
         }
-        public void Harc(Ellenség ellenség)
+        public void Harc(Ellenség ellenség, int ut)
         {
             if (tamadas == true)
             {
                 return;
             }
-            Tamadas(ellenség);
-            ellenség.Tamadas(this);
+            if (ut == 1)
+            {
+                Tamadas(ellenség);
+                ut++;
+            }
+            if (ut == 2)
+            {
+                ellenség.Tamadas(this);
+                ut--;
+            }
         }
         public void Tamadas(Ellenség ellenség)
         {
+            if (HP == 0)
+            {
+                return;
+            }
             tamadas = true;
             if (Ittas)
             {
-                Console.WriteLine("A karakter táncolni kezdett és a levegőt ütöti");
+                Console.WriteLine("A karakter táncolni kezdett és a levegőt ütötte");
                 tamadas = false;
                 return;
             }
@@ -92,6 +129,11 @@ namespace Idk_anymore
         public void Étkezés()
         {
             bool food = false;
+            if (Étel == MaxÉtel)
+            {
+                Console.WriteLine("Tele vagy");
+                return;
+            }
             foreach (var item in Inventory)
             {
                 if (item == Item.Etel)
@@ -99,6 +141,7 @@ namespace Idk_anymore
                     Étel += 1;
                     Inventory.Remove(item);
                     food = true;
+                    Console.WriteLine("Élelem elfogyasztva");
                 }
             }
             if (food == false)
@@ -130,6 +173,7 @@ namespace Idk_anymore
         }
         public void ShowInventory()
         {
+            Console.WriteLine("Inventory:");
             foreach (var item in Inventory)
             {
                 Console.WriteLine($"\t{item}");
@@ -169,8 +213,37 @@ namespace Idk_anymore
         }
         public void Alvas()
         {
-            HP += 1;
+            if (Ittas)
+            {
+                Console.WriteLine("A karakter alszik, +1HP és a karakter kijózanodott");
+                HP += 1;
+            }
+            else if(Ittas && HP == MaxHP)
+            {
+                Console.WriteLine("A karakter alszik, a karakter kijózanodott");
+                return;
+            }
+            else if (HP == MaxHP)
+            {
+                Console.WriteLine("A karakter alszik, de már a HP maxon van");
+                return;
+            }
+            else
+            {
+                Console.WriteLine("A karakter alszik, +1HP");
+                HP += 1;
+            }
             Ittas = false;
+        }
+        public void getÉtel()
+        {
+            Inventory.Add(Item.Etel);
+            Console.WriteLine($"Szereztél kaját");
+        }
+        public void getGyogynoveny()
+        {
+            Inventory.Add(Item.Gyogynoveny);
+            Console.WriteLine("Nice, kaptál egy gyógynövényt");
         }
     }
 }

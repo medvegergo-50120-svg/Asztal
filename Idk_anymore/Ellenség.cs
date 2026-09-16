@@ -20,6 +20,7 @@ namespace Idk_anymore
         public void Sebzodes(int amount, Player player)
         {
             HP -= amount;
+            Console.WriteLine($"{Nev} sebződött {amount} pontot.");
             if (HP <= 0)
             {
                 Console.WriteLine($"{Nev} meghalt.");
@@ -28,7 +29,11 @@ namespace Idk_anymore
         }
         public void Tamadas(Player player)
         {
-            player.HP -= Sebzés;
+            if (HP > 0)
+            {
+                player.HP -= Sebzés;
+                Console.WriteLine($"{player.Nev}t megtámadta {Nev}: {player.HP}/{player.MaxHP}.");
+            }
         }
     }
 }
